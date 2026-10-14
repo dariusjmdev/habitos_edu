@@ -80,6 +80,7 @@ function crearHabito(e) {
   const habito = { id: generarId(habitos), nombre, descripcion, categoria };
   habitos.push(habito);
   guardarTodo();
+  actualizarEstadisticas();
   rellenarDesplegable();  // el desplegable del formulario B se actualiza
 
   formHabito.reset();
@@ -125,6 +126,7 @@ function crearRegistro(e) {
   const registro = { id: generarId(registros), habitoId, fecha, observaciones, cumplido };
   registros.push(registro);
   guardarTodo();
+  actualizarEstadisticas();
 
   formRegistro.reset();
   mostrarMensaje("r-mensaje", "Registro guardado.", "ok");
@@ -207,6 +209,7 @@ function toggleCumplido(id) {
   if (!reg) return;
   reg.cumplido = !reg.cumplido;
   guardarTodo();
+  actualizarEstadisticas();
 }
 
 // La llama el botón de la tabla.
@@ -217,3 +220,24 @@ function cambiarEstado(id) {
   principal.toggleCumplido(id);  // modifica el array de la ventana principal
   pintarTabla();                 // repinta para ver el cambio al instante
 }
+// ===== ESTADÍSTICAS Y BORRADO =====
+function actualizarEstadisticas() {
+  document.getElementById("stat-habitos").textContent = habitos.length;
+  document.getElementById("stat-cumplidos").textContent = registros.filter(r => r.cumplido).length;
+  document.getElementById("stat-fallados").textContent = registros.filter(r => !r.cumplido).length;
+}
+
+function borrarTodo() {
+  if (!confirm("¿Seguro que quieres borrar todos los hábitos y registros?")) return;
+  borrarCookie("habitos");
+  borrarCookie("registros");
+  habitos = [];
+  registros = [];
+  rellenarDesplegable();
+  actualizarEstadisticas();
+  pintarTabla();
+}
+
+document.getElementById("btn-borrar").addEventListener("click", borrarTodo);
+
+actualizarEstadisticas();  // al cargar la página

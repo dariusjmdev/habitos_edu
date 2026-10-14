@@ -32,3 +32,7 @@ th, td { padding: .5rem; border-bottom: 1px solid #334155; text-align: left; }
 td.ok { color: #4ade80; font-weight: 700; }
 td.ko { color: #f87171; font-weight: 700; }
 td button { padding: .25rem .6rem; font-size: .8rem; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-bottom: 1rem; }
+.stat { background: #0f172a; border-radius: 8px; padding: .8rem; text-align: center; font-size: .85rem; }
+.stat strong { display: block; font-size: 1.8rem; }
+button.peligro { background: #ef4444; color: #fff; }
