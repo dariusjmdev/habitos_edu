@@ -46,3 +46,43 @@ function cargarTodo() {
 }
 
 cargarTodo();
+
+// ===== UTILIDADES =====
+
+// Id único: el mayor id existente + 1 (o 1 si la lista está vacía)
+function generarId(lista) {
+  return lista.length ? Math.max(...lista.map(item => item.id)) + 1 : 1;
+}
+
+// Muestra un mensaje bajo el formulario (tipo: "error" u "ok")
+function mostrarMensaje(idElemento, texto, tipo) {
+  const p = document.getElementById(idElemento);
+  p.textContent = texto;
+  p.className = "mensaje " + tipo;
+}
+
+// ===== FORMULARIO A: CREAR HÁBITOS =====
+const formHabito = document.getElementById("form-habito");
+
+function crearHabito(e) {
+  e.preventDefault();  // evita que la página se recargue
+
+  const nombre = document.getElementById("h-nombre").value.trim();
+  const descripcion = document.getElementById("h-descripcion").value.trim();
+  const categoria = document.getElementById("h-categoria").value;
+
+  // Validación: el nombre no puede estar vacío
+  if (nombre === "") {
+    mostrarMensaje("h-mensaje", "El nombre es obligatorio.", "error");
+    return;
+  }
+
+  const habito = { id: generarId(habitos), nombre, descripcion, categoria };
+  habitos.push(habito);
+  guardarTodo();
+
+  formHabito.reset();
+  mostrarMensaje("h-mensaje", `Hábito "${nombre}" creado.`, "ok");
+}
+
+formHabito.addEventListener("submit", crearHabito);

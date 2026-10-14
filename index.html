@@ -12,6 +12,28 @@
   </header>
 
   <main>
+    <section class="tarjeta">
+  <h2>Nuevo hábito</h2>
+  <form id="form-habito">
+    <label>Nombre
+      <input type="text" id="h-nombre" placeholder="Ej: Leer 20 minutos">
+    </label>
+    <label>Descripción
+      <textarea id="h-descripcion" rows="2"></textarea>
+    </label>
+    <label>Categoría
+      <select id="h-categoria">
+        <option>Salud</option>
+        <option>Estudio</option>
+        <option>Ocio</option>
+        <option>Trabajo</option>
+        <option>Otros</option>
+      </select>
+    </label>
+    <p id="h-mensaje" class="mensaje"></p>
+    <button type="submit">Crear</button>
+  </form>
+</section>
   </main>
 
   <script src="app.js"></script>
