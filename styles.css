@@ -14,3 +14,20 @@ button:hover { filter: brightness(1.1); }
 .mensaje { min-height: 1.2em; margin: 0; font-size: .85rem; }
 .mensaje.error { color: #f87171; }
 .mensaje.ok { color: #4ade80; }
+#menu { display: flex; gap: 1.2rem; }
+#menu a { color: #94a3b8; text-decoration: none; font-weight: 600; }
+#menu a:hover { color: #fff; }
+
+/* Modal: capa que cubre toda la pantalla */
+.modal { position: fixed; inset: 0; background: rgba(0, 0, 0, .6); display: flex; justify-content: center; align-items: center; padding: 1rem; }
+.modal.oculto { display: none; }
+.modal-caja { width: 100%; max-width: 640px; max-height: 85vh; overflow: auto; background: #1e293b; border-radius: 12px; padding: 1.25rem; }
+.modal-cabecera { display: flex; justify-content: space-between; align-items: center; }
+.modal-cabecera h2 { margin: 0; }
+#cerrar-modal { background: transparent; color: #e2e8f0; font-size: 1.2rem; padding: .2rem .5rem; }
+#resumen { color: #94a3b8; }
+
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { padding: .5rem; border-bottom: 1px solid #334155; text-align: left; }
+td.ok { color: #4ade80; font-weight: 700; }
+td.ko { color: #f87171; font-weight: 700; }

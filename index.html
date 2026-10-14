@@ -9,6 +9,10 @@
 <body>
   <header>
     <h1>HábitoTracker</h1>
+    <nav id="menu">
+        <a href="#" id="enlace-inicio">Inicio</a>
+        <a href="#" id="enlace-seguimiento">Ver seguimiento</a>
+    </nav>
   </header>
 
   <main>
@@ -54,7 +58,26 @@
   </form>
 </section>
   </main>
-
+<div id="modal" class="modal oculto">
+  <div class="modal-caja">
+    <div class="modal-cabecera">
+      <h2>Seguimiento</h2>
+      <button id="cerrar-modal" aria-label="Cerrar">✕</button>
+    </div>
+    <p id="resumen"></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Hábito</th>
+          <th>Fecha</th>
+          <th>Observaciones</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
+</div>
   <script src="app.js"></script>
 </body>
 </html>

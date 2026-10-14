@@ -133,3 +133,63 @@ function crearRegistro(e) {
 formRegistro.addEventListener("submit", crearRegistro);
 
 rellenarDesplegable();  // al cargar la página, con los hábitos guardados
+// ===== MENÚ Y MODAL =====
+const modal = document.getElementById("modal");
+
+function abrirModal() {
+  pintarTabla();                    // la tabla se regenera con los datos actuales
+  modal.classList.remove("oculto"); // se muestra
+}
+
+function cerrarModal() {
+  modal.classList.add("oculto");    // se oculta
+}
+
+// Crea una celda <td> con texto (y clase opcional)
+function crearCelda(texto, clase) {
+  const td = document.createElement("td");
+  td.textContent = texto;
+  if (clase) td.className = clase;
+  return td;
+}
+
+// Genera la tabla: una fila por registro + resumen
+function pintarTabla() {
+  const tbody = document.getElementById("tabla-body");
+  tbody.innerHTML = "";
+
+  registros.forEach(reg => {
+    const habito = habitos.find(h => h.id === reg.habitoId);  // relación por habitoId
+    const tr = document.createElement("tr");
+
+    tr.appendChild(crearCelda(habito ? habito.nombre : "(hábito borrado)"));
+    tr.appendChild(crearCelda(reg.fecha));
+    tr.appendChild(crearCelda(reg.observaciones || "—"));
+    tr.appendChild(crearCelda(reg.cumplido ? "✓" : "✗", reg.cumplido ? "ok" : "ko"));
+
+    tbody.appendChild(tr);
+  });
+
+  const cumplidos = registros.filter(r => r.cumplido).length;
+  const fallados = registros.length - cumplidos;
+  document.getElementById("resumen").textContent = `Cumplidos: ${cumplidos} · Fallados: ${fallados}`;
+}
+
+// Eventos del menú y del modal
+document.getElementById("enlace-seguimiento").addEventListener("click", function (e) {
+  e.preventDefault();
+  abrirModal();
+});
+
+document.getElementById("enlace-inicio").addEventListener("click", function (e) {
+  e.preventDefault();
+  cerrarModal();
+  window.scrollTo(0, 0);
+});
+
+document.getElementById("cerrar-modal").addEventListener("click", cerrarModal);
+
+// Cerrar al hacer clic en el fondo oscuro (no en la caja)
+modal.addEventListener("click", function (e) {
+  if (e.target === this) cerrarModal();
+});
