@@ -34,6 +34,25 @@
     <button type="submit">Crear</button>
   </form>
 </section>
+<section class="tarjeta">
+  <h2>Registrar día</h2>
+  <form id="form-registro">
+    <label>Hábito
+      <select id="r-habito"></select>
+    </label>
+    <label>Fecha
+      <input type="date" id="r-fecha">
+    </label>
+    <label>Observaciones
+      <textarea id="r-observaciones" rows="2"></textarea>
+    </label>
+    <label class="check">
+      <input type="checkbox" id="r-cumplido"> Cumplido
+    </label>
+    <p id="r-mensaje" class="mensaje"></p>
+    <button type="submit">Guardar registro</button>
+  </form>
+</section>
   </main>
 
   <script src="app.js"></script>

@@ -80,9 +80,56 @@ function crearHabito(e) {
   const habito = { id: generarId(habitos), nombre, descripcion, categoria };
   habitos.push(habito);
   guardarTodo();
+  rellenarDesplegable();  // el desplegable del formulario B se actualiza
 
   formHabito.reset();
   mostrarMensaje("h-mensaje", `Hábito "${nombre}" creado.`, "ok");
 }
 
 formHabito.addEventListener("submit", crearHabito);
+// ===== FORMULARIO B: REGISTRAR DÍAS =====
+const formRegistro = document.getElementById("form-registro");
+
+// Genera las <option> del desplegable recorriendo el array de hábitos
+function rellenarDesplegable() {
+  const select = document.getElementById("r-habito");
+  select.innerHTML = "";
+
+  const inicial = document.createElement("option");
+  inicial.value = "";
+  inicial.textContent = "-- Elige un hábito --";
+  select.appendChild(inicial);
+
+  habitos.forEach(h => {
+    const op = document.createElement("option");
+    op.value = h.id;              // el value guarda el id del hábito
+    op.textContent = h.nombre;    // textContent evita inyectar HTML
+    select.appendChild(op);
+  });
+}
+
+function crearRegistro(e) {
+  e.preventDefault();
+
+  const habitoId = Number(document.getElementById("r-habito").value); // value es texto -> a número
+  const fecha = document.getElementById("r-fecha").value;
+  const observaciones = document.getElementById("r-observaciones").value.trim();
+  const cumplido = document.getElementById("r-cumplido").checked;
+
+  // Validación: tiene que haber hábito y fecha
+  if (!habitoId || fecha === "") {
+    mostrarMensaje("r-mensaje", "Elige un hábito y una fecha.", "error");
+    return;
+  }
+
+  const registro = { id: generarId(registros), habitoId, fecha, observaciones, cumplido };
+  registros.push(registro);
+  guardarTodo();
+
+  formRegistro.reset();
+  mostrarMensaje("r-mensaje", "Registro guardado.", "ok");
+}
+
+formRegistro.addEventListener("submit", crearRegistro);
+
+rellenarDesplegable();  // al cargar la página, con los hábitos guardados
