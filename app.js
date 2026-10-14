@@ -166,7 +166,13 @@ function pintarTabla() {
     tr.appendChild(crearCelda(reg.fecha));
     tr.appendChild(crearCelda(reg.observaciones || "—"));
     tr.appendChild(crearCelda(reg.cumplido ? "✓" : "✗", reg.cumplido ? "ok" : "ko"));
-
+    // Botón para cambiar el estado de este registro
+    const tdAccion = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.textContent = "Cambiar";
+    btn.addEventListener("click", () => cambiarEstado(reg.id));
+    tdAccion.appendChild(btn);
+    tr.appendChild(tdAccion);
     tbody.appendChild(tr);
   });
 
@@ -193,3 +199,21 @@ document.getElementById("cerrar-modal").addEventListener("click", cerrarModal);
 modal.addEventListener("click", function (e) {
   if (e.target === this) cerrarModal();
 });
+// ===== CAMBIAR ESTADO =====
+
+// Función de la ventana PRINCIPAL: invierte cumplido en el array real y guarda
+function toggleCumplido(id) {
+  const reg = registros.find(r => r.id === id);
+  if (!reg) return;
+  reg.cumplido = !reg.cumplido;
+  guardarTodo();
+}
+
+// La llama el botón de la tabla.
+// Si la tabla estuviera en una 2ª ventana, window.opener sería la ventana padre.
+// Aquí la tabla está en un modal (misma ventana): window.opener es null y usamos window.
+function cambiarEstado(id) {
+  const principal = window.opener || window;
+  principal.toggleCumplido(id);  // modifica el array de la ventana principal
+  pintarTabla();                 // repinta para ver el cambio al instante
+}
