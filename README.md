@@ -36,9 +36,6 @@
 7. [Fase 4: Menú y modal con la tabla](#-fase-4-menú-y-modal-con-la-tabla)
 8. [Fase 5: Cambiar el estado desde la tabla](#-fase-5-cambiar-el-estado-desde-la-tabla)
 9. [Fase 6: Estadísticas, pulido y publicación](#-fase-6-estadísticas-pulido-y-publicación)
-10. [Cobertura del RA3](#-cobertura-del-ra3)
-11. [Historial de commits](#-historial-de-commits)
-12. [Checklist de entrega](#-checklist-de-entrega)
 
 ---
 
